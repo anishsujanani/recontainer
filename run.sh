@@ -35,7 +35,15 @@ echo "[+] Live subdomains found: `wc -l live-subdomains | cut -d ' ' -f1` subdom
 
 echo "[+] Running live subdomains through wayback"
 cat live-subdomains | waybackurls > live-subdomains-wayback
-echo "[+} Variants of live subdomains from wayback: `wc -l live-subdomains-wayback | cut -d ' ' -f1` <---------- Secondary analysis file"
+echo "[+] Variants of live subdomains from wayback: `wc -l live-subdomains-wayback | cut -d ' ' -f1` <---------- Secondary analysis file"
+
+echo "[+] Running httpx on live-subdomains to get status codes and page titles."
+cat live-subdomains | httpx -status-code -title -silent > live-subdomains-httpx
+echo "[+] httpx output will help narrow down which subdomains to start testing on"
+
+echo "[+] Running hakrawler on live-subdomains with depth three: -d 3"
+cat live-subdomains | hakrawler > endpoint-crawl-hakrawler
+echo "[+] hakrawler output will give endpoints and URLs to test with parameters as seen in code"
 
 echo "[+] Creating zip file"
 cd /tmp

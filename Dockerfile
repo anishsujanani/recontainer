@@ -20,6 +20,8 @@ RUN apt update && \
 	go get github.com/tomnomnom/waybackurls && \
 	go get -u github.com/tomnomnom/meg && \
 	git clone https://github.com/aboul3la/Sublist3r.git && \
+	go get -v github.com/projectdiscovery/httpx/cmd/httpx && \
+	go get github.com/hakluke/hakrawler && \
 	pip3 install -r Sublist3r/requirements.txt
 
 COPY run.sh /run.sh
