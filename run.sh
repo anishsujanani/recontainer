@@ -23,19 +23,22 @@ subfinder -silent -d $1 -o subfinder-op > /dev/null 2>&1 && echo "[+] subfinder 
 echo "[+] Running Sublist3r"
 python3 /Sublist3r/sublist3r.py -d $1 -o sublist3r-op > /dev/null 2>&1 && echo "[+] sublist3r found: `wc -l sublist3r-op | cut -d ' ' -f1` subdomains" &
 
+echo "[+] Running Amass enum in passive mode"
+./amass_linux_amd64/amass enum -passive -d $1 -o amass-op && echo "[+] amass found: `wc -l amass-op | cut -d ' ' -f1` subdomains" &
+ 
 wait
 
 echo "[+] Getting unique subdomains"
-cat assetfinder-op subfinder-op sublist3r-op | sort | uniq > all-subdomains
+cat assetfinder-op subfinder-op sublist3r-op amass-op | sort | uniq > all-subdomains
 echo "[+] Unique subdomains found: `wc -l all-subdomains | cut -d ' ' -f1`"
 
-echo "[+] Getting live subdomains from above list"
-cat all-subdomains | httprobe > live-subdomains
-echo "[+] Live subdomains found: `wc -l live-subdomains | cut -d ' ' -f1` subdomains <------------------ Primary analysis file"
+#echo "[+] Getting live subdomains from above list"
+#cat all-subdomains | httprobe > live-subdomains
+#echo "[+] Live subdomains found: `wc -l live-subdomains | cut -d ' ' -f1` subdomains <------------------ Primary analysis file"
 
-echo "[+] Running live subdomains through wayback"
-cat live-subdomains | waybackurls > live-subdomains-wayback
-echo "[+] Variants of live subdomains from wayback: `wc -l live-subdomains-wayback | cut -d ' ' -f1` <---------- Secondary analysis file"
+#echo "[+] Running live subdomains through wayback"
+#cat live-subdomains | waybackurls > live-subdomains-wayback
+#echo "[+] Variants of live subdomains from wayback: `wc -l live-subdomains-wayback | cut -d ' ' -f1` <---------- Secondary analysis file"
 
 echo "[+] Running httpx on live-subdomains to get status codes and page titles."
 cat live-subdomains | httpx -status-code -title -silent > live-subdomains-httpx
