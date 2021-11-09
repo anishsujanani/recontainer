@@ -24,7 +24,7 @@ echo "[+] Running Sublist3r"
 python3 /Sublist3r/sublist3r.py -d $1 -o sublist3r-op > /dev/null 2>&1 && echo "[+] sublist3r found: `wc -l sublist3r-op | cut -d ' ' -f1` subdomains" &
 
 echo "[+] Running Amass enum in passive mode"
-./amass_linux_amd64/amass enum -passive -d $1 -o amass-op && echo "[+] amass found: `wc -l amass-op | cut -d ' ' -f1` subdomains" &
+/amass_linux_amd64/amass enum -silent -passive -d $1 -o amass-op && echo "[+] amass found: `wc -l amass-op | cut -d ' ' -f1` subdomains" &
  
 wait
 
