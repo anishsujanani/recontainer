@@ -22,7 +22,9 @@ RUN apt update && \
 	git clone https://github.com/aboul3la/Sublist3r.git && \
 	go get -v github.com/projectdiscovery/httpx/cmd/httpx && \
 	go get github.com/hakluke/hakrawler && \
-	pip3 install -r Sublist3r/requirements.txt
+	pip3 install -r Sublist3r/requirements.txt && \
+	wget https://github.com/OWASP/Amass/releases/download/v3.14.3/amass_linux_amd64.zip && \
+	unzip amass_linux_amd64.zip
 
 COPY run.sh /run.sh
 RUN chmod +x /run.sh
