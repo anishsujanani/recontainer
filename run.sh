@@ -33,7 +33,7 @@ cat assetfinder-op subfinder-op sublist3r-op amass-op | sort | uniq > all-subdom
 echo "[+] Unique subdomains found: `wc -l all-subdomains | cut -d ' ' -f1`"
 
 echo "[+] Getting live subdomains from above list"
-cat all-subdomains | httprobe > live-subdomains
+cat all-subdomains | httprobe -c 25 > live-subdomains
 echo "[+] Live subdomains found: `wc -l live-subdomains | cut -d ' ' -f1` subdomains <------------------ Primary analysis file"
 
 #echo "[+] Running live subdomains through wayback"
