@@ -11,8 +11,6 @@ apt install -y git
 apt install -y python3-pip
 
 wget https://go.dev/dl/go1.20.4.linux-arm64.tar.gz
-echo 'about to untar golang'
-sleep 10
 tar -C /usr/local -xvf go1.20.4.linux-arm64.tar.gz
 
 go install github.com/tomnomnom/assetfinder@latest &
