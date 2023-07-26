@@ -46,5 +46,3 @@ cd /tmp
 zip -r $1.zip $1
 
 echo "[+] Done. This container will now exit. Output file is at /tmp/$1.zip"
-echo "[+] Run the following command:"
-echo "		docker cp $(hostname):/tmp/$1.zip . && docker container rm $(hostname)"

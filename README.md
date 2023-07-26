@@ -1,6 +1,6 @@
 # Build container with:
 `docker build . -t recontainer`
 
-# Run container with:
-`docker run -it recontainer <domain_here>`  
-On completion, a command will be printed. Run that command exactly to clean up.
+# Run the container:
+The script dumps output for the input domain to `/tmp/$1`, so volume map onto that path on your host.  
+`docker run --rm -v /path/to/store/files:/tmp/<DOMAIN> recontainer <DOMAIN>`
